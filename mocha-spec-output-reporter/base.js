@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 
+var fs = require('fs');
 var tty = require('tty');
 var diff = require('diff');
 var ms = require('./ms');
@@ -10,6 +11,8 @@ var utils = require('./utils');
 /**
  * Save timer references to avoid Sinon interfering (see GH-237).
  */
+
+var payload = {};
 
 var Date = global.Date
   , setTimeout = global.setTimeout
@@ -294,12 +297,17 @@ Base.prototype.epilogue = function(){
     stats.passes || 0,
     ms(stats.duration));
 
+    payload.success = stats.passes || 0;
+    payload.duration = ms(stats.duration);
+
   // pending
   if (stats.pending) {
     fmt = color('pending', ' ')
       + color('pending', ' %d pending');
 
     console.log(fmt, stats.pending);
+
+    payload.pending = stats.pending;
   }
 
   // failures
@@ -308,12 +316,30 @@ Base.prototype.epilogue = function(){
 
     console.error(fmt,
       stats.failures);
+      payload.failures = stats.failures;
 
     Base.list(this.failures);
     console.error();
   }
 
   console.log();
+
+  console.log('process.argv', process.argv); 
+  if ( payload ) {
+      var output;
+      process.argv.map(function(arg) {
+          if ( arg.indexOf('output') ) {
+              output = arg.split('=').pop();
+          }
+      });
+      if ( output ) {
+          fs.writeFileSync(output, JSON.stringify(payload), 'utf8', function(err) {
+              if(err) {
+                  console.log(err);
+              }
+          }); 
+      }
+  }
 };
 
 /**
