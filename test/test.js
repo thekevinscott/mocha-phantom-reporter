@@ -10,8 +10,10 @@ var cmd = function(command) {
 
     exec(command, function(error, stdout, stderr) {
         if ( error ) {
+            console.log('error', error);
             dfd.resolve(error.toString());
         } else if ( stderr ) {
+            console.log('stderr', stderr);
             dfd.resolve(stderr);
         }
         dfd.resolve(stdout);
@@ -24,18 +26,18 @@ describe('Test Mocha Reporter output', function() {
     it('should match for one success', function(done) {
         runTest('one_success', done);
     });
-    it('should match for multiple successes', function(done) {
-        runTest('two_successes', done);
-    });
-    it('should match for one failure', function(done) {
-        runTest('one_failure', done);
-    });
-    it('should match for multiple failures', function(done) {
-        runTest('two_failures', done);
-    });
-    it('should match for successes and failures', function(done) {
-        runTest('successes_and_failures', done);
-    });
+    //it('should match for multiple successes', function(done) {
+        //runTest('two_successes', done);
+    //});
+    //it('should match for one failure', function(done) {
+        //runTest('one_failure', done);
+    //});
+    //it('should match for multiple failures', function(done) {
+        //runTest('two_failures', done);
+    //});
+    //it('should match for successes and failures', function(done) {
+        //runTest('successes_and_failures', done);
+    //});
 });
 
 function runTest(file, done) {
@@ -43,7 +45,7 @@ function runTest(file, done) {
 
     Q.all([
         cmd(command), 
-        cmd(command + ' --reporter mocha-standalone-spec-reporter')
+        cmd(command + ' --reporter mocha-spec-output-reporter')
     ]).spread(function(specOutput, customOutput) {
         // times might be different by a millisecond
         specOutput = specOutput.replace(new RegExp("\\(([^)]+)\\)",'g'),'');
@@ -51,7 +53,7 @@ function runTest(file, done) {
         //logOutputs(specOutput, customOutput);
         assert.equal(specOutput, customOutput);
         done();
-    }).fail(function(err, err2) {
+    }).fail(function(err) {
         console.log('here we are!');
         done(err);
     });

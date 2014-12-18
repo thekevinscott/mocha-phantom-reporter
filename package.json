@@ -1,14 +1,14 @@
 {
-  "name": "mocha-standalone-spec-reporter",
-  "version": "0.0.1",
+  "name": "mocha-spec-output-reporter",
+  "version": "0.0.2",
   "description": "A standalone Mocha Reporter modeled after spec",
-  "main": "mocha-standalone-spec-reporter/spec.js",
+  "main": "mocha-spec-output-reporter/spec.js",
   "scripts": {
     "test": "mocha test/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scottlabs/mocha-standalone-spec-reporter.git"
+    "url": "https://github.com/scottlabs/mocha-spec-output-reporter.git"
   },
   "keywords": [
     "mocha",
@@ -18,9 +18,9 @@
   "author": "Kevin Scott",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/scottlabs/mocha-standalone-spec-reporter/issues"
+    "url": "https://github.com/scottlabs/mocha-spec-output-reporter/issues"
   },
-  "homepage": "https://github.com/scottlabs/mocha-standalone-spec-reporter",
+  "homepage": "https://github.com/scottlabs/mocha-spec-output-reporter",
   "dependencies": {
     "debug": "^2.1.0",
     "diff": "^1.2.0",
