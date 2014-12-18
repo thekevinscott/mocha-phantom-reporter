@@ -324,7 +324,6 @@ Base.prototype.epilogue = function(){
 
   console.log();
 
-  console.log('process.argv', process.argv); 
   if ( payload ) {
       var output;
       process.argv.map(function(arg) {
