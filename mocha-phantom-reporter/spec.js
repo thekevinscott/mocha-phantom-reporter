@@ -123,7 +123,7 @@ function Spec(runner) {
         var payload = {
             summary: {
                 time: stats.duration/1000+'s',
-                results: passes.length + ' / ' + tests.length
+                results: passes.length + ' passes / ' + tests.length + ' total'
             },
             stats: self.stats
             , tests: tests.map(clean)
