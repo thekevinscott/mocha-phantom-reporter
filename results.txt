@@ -1,0 +1,1 @@
+{"summary":{"time":"0.012s","results":"1 / 1"},"stats":{"suites":1,"tests":1,"passes":0,"pending":0,"failures":1,"start":"2014-12-19T16:09:14.791Z","end":"2014-12-19T16:09:14.803Z","duration":12},"tests":[{"title":"runs a test","fullTitle":"something runs a test","duration":1}],"failures":[{"title":"runs a test","fullTitle":"something runs a test","duration":1}],"passes":[]}

@@ -121,6 +121,10 @@ function Spec(runner) {
 
         console.log();
         var payload = {
+            summary: {
+                time: stats.duration/1000+'s',
+                results: failures.length + ' / ' + tests.length
+            },
             stats: self.stats
             , tests: tests.map(clean)
             , failures: failures.map(clean)
@@ -128,7 +132,7 @@ function Spec(runner) {
         };
         var output = 'tmp.txt';
         phantom.args.map(function(arg) {
-            if ( arg.indexOf('output') ) {
+            if ( arg.indexOf('output') === 2 ) {
                 output = arg.split('=').pop();
             }
         });
