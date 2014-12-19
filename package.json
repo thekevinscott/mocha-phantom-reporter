@@ -1,14 +1,14 @@
 {
-  "name": "mocha-spec-output-reporter",
+  "name": "mocha-phantom-reporter",
   "version": "0.0.2",
   "description": "A standalone Mocha Reporter modeled after spec",
-  "main": "mocha-spec-output-reporter/spec.js",
+  "main": "mocha-phantom-reporter/spec.js",
   "scripts": {
     "test": "mocha test/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scottlabs/mocha-spec-output-reporter.git"
+    "url": "https://github.com/scottlabs/mocha-phantom-reporter.git"
   },
   "keywords": [
     "mocha",
@@ -18,14 +18,18 @@
   "author": "Kevin Scott",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/scottlabs/mocha-spec-output-reporter/issues"
+    "url": "https://github.com/scottlabs/mocha-phantom-reporter/issues"
   },
-  "homepage": "https://github.com/scottlabs/mocha-spec-output-reporter",
+  "homepage": "https://github.com/scottlabs/mocha-phantom-reporter",
   "dependencies": {
+    "casper-chai": "^0.2.1",
+    "casperjs": "^1.1.0-beta3",
+    "chai": "^1.10.0",
     "debug": "^2.1.0",
     "diff": "^1.2.0",
     "glob": "^4.3.1",
     "mocha": "^2.0.1",
+    "mocha-casperjs": "^0.5.3",
     "q": "^1.1.2"
   }
 }

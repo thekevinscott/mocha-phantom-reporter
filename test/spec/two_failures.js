@@ -1,9 +1,8 @@
-var assert = require("assert")
 describe('something', function() {
     it('runs a test', function() {
-        assert.equal(1, 2);
+        'a'.should.equal('b');
     });
-    it('runs a second test', function() {
-        assert.equal(2, 3);
+    it('runs a test', function() {
+        'b'.should.equal('c');
     });
 });

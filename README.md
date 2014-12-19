@@ -1,4 +1,4 @@
-mocha-spec-output-reporter
+mocha-phantom-reporter
 ==============================
 
 Forked from https://github.com/scottlabs/mocha-spec-output-reporter
