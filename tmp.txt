@@ -1,1 +1,1 @@
-{"success":2,"duration":"418ms","failures":2}
+{"stats":{"suites":1,"tests":1,"passes":0,"pending":0,"failures":1,"start":"2014-12-19T16:00:13.147Z","end":"2014-12-19T16:00:13.160Z","duration":13},"tests":[{"title":"runs a test","fullTitle":"something runs a test","duration":1}],"failures":[{"title":"runs a test","fullTitle":"something runs a test","duration":1}],"passes":[]}

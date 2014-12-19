@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var payload = {};
+var fs = require('fs');
 var Base = Mocha.reporters.Base
   , cursor = Base.cursor
   , color = Base.color
@@ -22,95 +22,116 @@ exports = module.exports = Spec;
  */
 
 function Spec(runner) {
-  Base.call(this, runner);
+    Base.call(this, runner);
 
-  var self = this
-    , stats = this.stats
-    , indents = 0
-    , n = 0;
+    var self = this
+        , stats = this.stats
+        , indents = 0
+        , n = 0
+        , tests = []
+        , failures = []
+        , passes = [];
 
-  function indent() {
-    return Array(indents).join('  ')
-  }
-
-  runner.on('start', function(){
-    console.log();
-  });
-
-  runner.on('suite', function(suite){
-    ++indents;
-    console.log(color('suite', '%s%s'), indent(), suite.title);
-  });
-
-  runner.on('suite end', function(suite){
-    --indents;
-    if (1 == indents) console.log();
-  });
-
-  runner.on('pending', function(test){
-    var fmt = indent() + color('pending', '  - %s');
-    console.log(fmt, test.title);
-  });
-
-  runner.on('pass', function(test){
-    if ('fast' == test.speed) {
-      var fmt = indent()
-        + color('checkmark', '  ' + Base.symbols.ok)
-        + color('pass', ' %s ');
-      cursor.CR();
-      console.log(fmt, test.title);
-    } else {
-      var fmt = indent()
-        + color('checkmark', '  ' + Base.symbols.ok)
-        + color('pass', ' %s ')
-        + color(test.speed, '(%dms)');
-      cursor.CR();
-      console.log(fmt, test.title, test.duration);
+    function indent() {
+        return Array(indents).join('  ')
     }
-  });
 
-  runner.on('fail', function(test, err){
-    cursor.CR();
-    console.log(indent() + color('fail', '  %d) %s'), ++n, test.title);
-  });
+    runner.on('start', function(){
+        console.log();
+    });
 
-  runner.on('end', function(){
-      var stats = this.stats;
-      var tests;
-      var fmt;
+    runner.on('suite', function(suite){
+        ++indents;
+        console.log(color('suite', '%s%s'), indent(), suite.title);
+    });
 
-      console.log();
+    runner.on('suite end', function(suite){
+        --indents;
+        if (1 == indents) console.log();
+    });
 
-      // passes
-      fmt = color('bright pass', ' ')
+    runner.on('test end', function(test) {
+        tests.push(test);
+    });
+
+    runner.on('pending', function(test){
+        var fmt = indent() + color('pending', '  - %s');
+        console.log(fmt, test.title);
+    });
+
+    runner.on('pass', function(test){
+        passes.push(test);
+        if ('fast' == test.speed) {
+            var fmt = indent()
+            + color('checkmark', '  ' + Base.symbols.ok)
+            + color('pass', ' %s ');
+            cursor.CR();
+            console.log(fmt, test.title);
+        } else {
+            var fmt = indent()
+            + color('checkmark', '  ' + Base.symbols.ok)
+            + color('pass', ' %s ')
+            + color(test.speed, '(%dms)');
+            cursor.CR();
+            console.log(fmt, test.title, test.duration);
+        }
+    });
+
+    runner.on('fail', function(test, err){
+        failures.push(test);
+        cursor.CR();
+        console.log(indent() + color('fail', '  %d) %s'), ++n, test.title);
+    });
+
+    runner.on('end', function(){
+        var stats = this.stats;
+        var fmt;
+
+        console.log();
+
+        // passes
+        fmt = color('bright pass', ' ')
         + color('green', ' %d passing')
         + color('light', ' (%s)');
 
-      console.log(fmt,
-        stats.passes || 0,
-        ms(stats.duration));
+        console.log(
+            fmt,
+            stats.passes || 0,
+            ms(stats.duration)
+        );
 
-      // pending
-      if (stats.pending) {
-        fmt = color('pending', ' ')
-          + color('pending', ' %d pending');
+        // pending
+        if (stats.pending) {
+            fmt = color('pending', ' ')
+            + color('pending', ' %d pending');
 
-        console.log(fmt, stats.pending);
-      }
+            console.log(fmt, stats.pending);
+        }
 
-      // failures
-      if (stats.failures) {
-        fmt = color('fail', '  %d failing');
+        // failures
+        if (stats.failures) {
+            fmt = color('fail', '  %d failing');
 
-        console.error(fmt,
-          stats.failures);
+            console.error(fmt,
+                          stats.failures);
 
-        Base.list(self.failures);
-        console.error();
-      }
+                          Base.list(self.failures);
+                          console.error();
+        }
 
-      console.log();
-  });
+        console.log();
+        var payload = {
+            stats: self.stats
+            , tests: tests.map(clean)
+            , failures: failures.map(clean)
+            , passes: passes.map(clean)
+        };
+        var path = 'tmp.txt';
+        var content = JSON.stringify(payload);
+        //console.log(process);
+        //console.log(process.argv);
+        fs.write(path, content, 'w');
+    });
 }
 
 /**
@@ -118,3 +139,11 @@ function Spec(runner) {
  */
 
 Spec.prototype.__proto__ = Base.prototype;
+
+function clean(test) {
+    return {
+        title: test.title
+    , fullTitle: test.fullTitle()
+    , duration: test.duration
+    }
+}
