@@ -126,11 +126,14 @@ function Spec(runner) {
             , failures: failures.map(clean)
             , passes: passes.map(clean)
         };
-        var path = 'tmp.txt';
+        var output = 'tmp.txt';
+        phantom.args.map(function(arg) {
+            if ( arg.indexOf('output') ) {
+                output = arg.split('=').pop();
+            }
+        });
         var content = JSON.stringify(payload);
-        //console.log(process);
-        //console.log(process.argv);
-        fs.write(path, content, 'w');
+        fs.write(output, content, 'w');
     });
 }
 
