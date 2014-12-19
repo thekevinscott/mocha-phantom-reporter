@@ -1,9 +1,11 @@
 mocha-spec-output-reporter
 ==============================
 
-A duplicate of Mocha's Spec Reporter, but also writes output to a JSON file, to pass along the results to future Grunt tasks.
+Forked from https://github.com/scottlabs/mocha-spec-output-reporter
+
+This is a third party Mocha reporter written on top of PhantomJS. Behavior is basically identical to Mocha's built-in spec reporter, but it also writes the output to a JSON file.
 
 To call:
 
-./node_modules/mocha/bin/mocha  test/spec/successes_and_failures.js --reporter mocha-spec-output-reporter/ --output=tmp.txt
+mocha  test/spec/successes_and_failures.js --reporter mocha-phantom-reporter/ --output=tmp.txt
 
