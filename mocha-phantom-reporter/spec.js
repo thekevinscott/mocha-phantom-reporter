@@ -21,6 +21,7 @@ exports = module.exports = Spec;
  * @api public
  */
 
+var suites = [{children: []}];
 function Spec(runner) {
     Base.call(this, runner);
 
@@ -41,8 +42,56 @@ function Spec(runner) {
     });
 
     runner.on('suite', function(suite){
+        var title = suite.title;
         ++indents;
-        console.log(color('suite', '%s%s'), indent(), suite.title);
+
+        function last(arr) {
+            return arr[arr.length-1];
+        };
+
+        function getParent(indents, arr) {
+            if ( ! arr ) { arr = suites; }
+
+            if ( indents <= 1 ) {
+                var a = arr;
+                if ( a.length && last(a).children && last(a).children.length) {
+                    a = last(last(a).children);
+                    if ( a.title ) {
+                        return a.title;
+                    }
+                }
+                return undefined;
+            } else {
+                --indents;
+                return getParent(indents, last(arr).children);
+            }
+        };
+
+        function pushSuite(title, indents, suites) {
+            if ( indents <= 0 ) {
+                var parentSuitesChildren = suites;
+                var suite = {
+                    title: title,
+                    children: []
+                };
+                parentSuitesChildren.push(suite);
+            } else {
+                --indents;
+                pushSuite(title, indents, last(suites).children);
+            }
+        };
+
+        //var theParent = getParent(indents);
+        //console.log('parent', theParent, 'title', title);
+
+        if ( getParent(indents) != title) {
+        //if ( 1 || last(suites) !== title ) {
+            pushSuite(title, indents, suites);
+            console.log(color('suite', '%s%s'), indent(), suite.title);
+        } else {
+            //console.log('dont write');
+            //console.log('title has been seen already', title);
+        }
     });
 
     runner.on('suite end', function(suite){
@@ -84,6 +133,7 @@ function Spec(runner) {
     });
 
     runner.on('end', function(){
+        //console.log(JSON.stringify(suites, null, 4));
         var stats = this.stats;
         var fmt;
 
