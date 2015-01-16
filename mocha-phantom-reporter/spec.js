@@ -35,7 +35,8 @@ exports = module.exports = Spec;
  * @api public
  */
 
-var suites = [{children: []}];
+var suites = {};
+var lastParent;
 function Spec(runner) {
     Base.call(this, runner);
 
@@ -55,22 +56,39 @@ function Spec(runner) {
         console.log();
     });
 
+    function getParentTitle(file) {
+        if ( ! file ) { file = files[current]; }
+        var parentTitle = file.split('/').shift().capitalize();
+        return parentTitle;
+    };
     function writeParent() {
         var file = files[current].split('/');
         if ( file.length > 1 ) {
-            var parentTitle = files[current].split('/').shift().capitalize();
-            console.log(color('suite', '%s%s'), indent(), parentTitle);
-            current++;
+            lastParent = getParentTitle();
+            console.log(color('suite', '%s%s'), indent(), lastParent);
         }
     };
 
     runner.on('suite', function(suite){
-        if ( indents === 1 ) {
-            ++indents;
-            writeParent(current);
-            //console.log('runner', Object.keys(runner));
-        }
         var title = suite.title;
+        var file = files[current].split('/');
+
+        //if ( lastParent && lastParent !== getParentTitle(files[current]) ) {
+        //}
+        if ( file.length > 1 && indents === 1) {
+            // there should be a parent (like 'Users')
+            ++indents;
+            if ( !suites[getParentTitle()]) {
+                writeParent(current);
+                suites[getParentTitle()] = true;
+            }
+            if ( indents===2) {
+                current++;
+            }
+        } else if ( indents === 1 ) {
+            // this implies there is no parent.
+            current++;
+        }
         ++indents;
         console.log(color('suite', '%s%s'), indent(), suite.title);
     });

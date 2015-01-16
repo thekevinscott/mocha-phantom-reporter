@@ -1,20 +1,25 @@
 
 
-  Spec
+  Users
     create
       ✓ should say yay 
 
-  Spec
     edit
       sub 1
         ✓ should say yay 
       sub 2
         ✓ should say yay 
 
-  Spec
-    debug
+    list
+      ✓ should say yay 
+
+  debug
+    ✓ should say yay 
+
+  Groups
+    create
       ✓ should say yay 
 
 
-  4 passing 
+  6 passing 
 
