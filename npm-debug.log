@@ -1,115 +1,20 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'test',
+1 verbose cli   'test/spec/one_failure.js' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose publish [ '.' ]
-5 verbose cache add [ '.', null ]
-6 verbose cache add name=undefined spec="." args=[".",null]
-7 verbose parsed url { protocol: null,
-7 verbose parsed url   slashes: null,
-7 verbose parsed url   auth: null,
-7 verbose parsed url   host: null,
-7 verbose parsed url   port: null,
-7 verbose parsed url   hostname: null,
-7 verbose parsed url   hash: null,
-7 verbose parsed url   search: null,
-7 verbose parsed url   query: null,
-7 verbose parsed url   pathname: '.',
-7 verbose parsed url   path: '.',
-7 verbose parsed url   href: '.' }
-8 silly lockFile 3a52ce78- .
-9 verbose lock . /Users/kscott/.npm/3a52ce78-.lock
-10 verbose tar pack [ '/Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz',
-10 verbose tar pack   '.' ]
-11 verbose tarball /Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz
-12 verbose folder .
-13 info prepublish mocha-phantom-reporter@0.0.4
-14 silly lockFile 1f1177db-tar tar://.
-15 verbose lock tar://. /Users/kscott/.npm/1f1177db-tar.lock
-16 silly lockFile eade07d6-antom-reporter-0-0-4-package-tgz tar:///Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz
-17 verbose lock tar:///Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz /Users/kscott/.npm/eade07d6-antom-reporter-0-0-4-package-tgz.lock
-18 silly lockFile 1f1177db-tar tar://.
-19 silly lockFile 1f1177db-tar tar://.
-20 silly lockFile eade07d6-antom-reporter-0-0-4-package-tgz tar:///Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz
-21 silly lockFile eade07d6-antom-reporter-0-0-4-package-tgz tar:///Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package.tgz
-22 silly lockFile 565b2d39-a-phantom-reporter-0-0-4-package /Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package
-23 verbose lock /Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package /Users/kscott/.npm/565b2d39-a-phantom-reporter-0-0-4-package.lock
-24 silly lockFile 565b2d39-a-phantom-reporter-0-0-4-package /Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package
-25 silly lockFile 565b2d39-a-phantom-reporter-0-0-4-package /Users/kscott/.npm/mocha-phantom-reporter/0.0.4/package
-26 silly lockFile 3a52ce78- .
-27 silly lockFile 3a52ce78- .
-28 silly publish { name: 'mocha-phantom-reporter',
-28 silly publish   version: '0.0.4',
-28 silly publish   description: 'A standalone Mocha Reporter modeled after spec',
-28 silly publish   main: 'mocha-phantom-reporter/spec.js',
-28 silly publish   scripts: { test: 'mocha test/test.js' },
-28 silly publish   repository:
-28 silly publish    { type: 'git',
-28 silly publish      url: 'https://github.com/scottlabs/mocha-phantom-reporter.git' },
-28 silly publish   keywords: [ 'mocha', 'spec', 'reporter' ],
-28 silly publish   author: { name: 'Kevin Scott' },
-28 silly publish   license: 'ISC',
-28 silly publish   bugs: { url: 'https://github.com/scottlabs/mocha-phantom-reporter/issues' },
-28 silly publish   homepage: 'https://github.com/scottlabs/mocha-phantom-reporter',
-28 silly publish   dependencies:
-28 silly publish    { 'casper-chai': '^0.2.1',
-28 silly publish      casperjs: '^1.1.0-beta3',
-28 silly publish      chai: '^1.10.0',
-28 silly publish      debug: '^2.1.0',
-28 silly publish      diff: '^1.2.0',
-28 silly publish      glob: '^4.3.1',
-28 silly publish      mocha: '^2.0.1',
-28 silly publish      'mocha-casperjs': '^0.5.3',
-28 silly publish      q: '^1.1.2' },
-28 silly publish   readme: 'mocha-phantom-reporter\n==============================\n\nThis is a third party Mocha reporter written on top of PhantomJS. Behavior is basically identical to Mocha\'s built-in spec reporter, but it also writes the output to a JSON file.\n\nTo call:\n\n./node_modules/mocha-casperjs/bin/mocha-casperjs test/spec/one_failure.js --reporter=./mocha-phantom-reporter/spec --output=results.txt\n',
-28 silly publish   readmeFilename: 'README.md',
-28 silly publish   gitHead: 'c7631046c3bbc0bf47f9fb2f40bdb9c69a0f53d2',
-28 silly publish   _id: 'mocha-phantom-reporter@0.0.4',
-28 silly publish   _shasum: '86e52f5875a20b4c11ecc4652c777b10d048ea89',
-28 silly publish   _from: '.' }
-29 verbose request where is /mocha-phantom-reporter
-30 verbose request registry https://registry.npmjs.org/
-31 verbose request id 102e28575995ab8f
-32 verbose url raw /mocha-phantom-reporter
-33 verbose url resolving [ 'https://registry.npmjs.org/', './mocha-phantom-reporter' ]
-34 verbose url resolved https://registry.npmjs.org/mocha-phantom-reporter
-35 verbose request where is https://registry.npmjs.org/mocha-phantom-reporter
-36 info trying registry request attempt 1 at 11:37:12
-37 http PUT https://registry.npmjs.org/mocha-phantom-reporter
-38 http 403 https://registry.npmjs.org/mocha-phantom-reporter
-39 verbose headers { date: 'Fri, 19 Dec 2014 16:37:09 GMT',
-39 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-39 verbose headers   'content-type': 'application/json',
-39 verbose headers   'cache-control': 'max-age=60',
-39 verbose headers   'content-length': '3221',
-39 verbose headers   'accept-ranges': 'bytes',
-39 verbose headers   via: '1.1 varnish',
-39 verbose headers   'x-served-by': 'cache-iad2130-IAD',
-39 verbose headers   'x-cache': 'MISS',
-39 verbose headers   'x-cache-hits': '0',
-39 verbose headers   'x-timer': 'S1419007029.130857,VS0,VE327',
-39 verbose headers   'keep-alive': 'timeout=10, max=50',
-39 verbose headers   connection: 'Keep-Alive' }
-40 error publish Failed PUT 403
-41 error Error: forbidden cannot modify pre-existing version: 0.0.4
-41 error old={"name":"mocha-phantom-reporter","version":"0.0.4","description":"A standalone Mocha Reporter modeled after spec","main":"mocha-phantom-reporter/spec.js","scripts":{"test":"mocha test/test.js"},"repository":{"type":"git","url":"https://github.com/scottlabs/mocha-phantom-reporter.git"},"keywords":["mocha","spec","reporter"],"author":{"name":"Kevin Scott"},"license":"ISC","bugs":{"url":"https://github.com/scottlabs/mocha-phantom-reporter/issues"},"homepage":"https://github.com/scottlabs/mocha-phantom-reporter","dependencies":{"casper-chai":"^0.2.1","casperjs":"^1.1.0-beta3","chai":"^1.10.0","debug":"^2.1.0","diff":"^1.2.0","glob":"^4.3.1","mocha":"^2.0.1","mocha-casperjs":"^0.5.3","q":"^1.1.2"},"gitHead":"c7631046c3bbc0bf47f9fb2f40bdb9c69a0f53d2","_id":"mocha-phantom-reporter@0.0.4","_shasum":"9af8c9af221554b11fb8a66947d45f2c87f1b4bc","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"thekevinscott","email":"kevin@scottlabsllc.com"},"maintainers":[{"name":"thekevinscott","email":"kevin@scottlabsllc.com"}],"dist":{"shasum":"9af8c9af221554b11fb8a66947d45f2c87f1b4bc","tarball":"http://registry.npmjs.org/mocha-phantom-reporter/-/mocha-phantom-reporter-0.0.4.tgz"}}
-41 error new={"name":"mocha-phantom-reporter","version":"0.0.4","description":"A standalone Mocha Reporter modeled after spec","main":"mocha-phantom-reporter/spec.js","scripts":{"test":"mocha test/test.js"},"repository":{"type":"git","url":"https://github.com/scottlabs/mocha-phantom-reporter.git"},"keywords":["mocha","spec","reporter"],"author":{"name":"Kevin Scott"},"license":"ISC","bugs":{"url":"https://github.com/scottlabs/mocha-phantom-reporter/issues"},"homepage":"https://github.com/scottlabs/mocha-phantom-reporter","dependencies":{"casper-chai":"^0.2.1","casperjs":"^1.1.0-beta3","chai":"^1.10.0","debug":"^2.1.0","diff":"^1.2.0","glob":"^4.3.1","mocha":"^2.0.1","mocha-casperjs":"^0.5.3","q":"^1.1.2"},"readme":"mocha-phantom-reporter\u000a==============================\u000a\u000aThis is a third party Mocha reporter written on top of PhantomJS. Behavior is basically identical to Mocha's built-in spec reporter, but it also writes the output to a JSON file.\u000a\u000aTo call:\u000a\u000a./node_modules/mocha-casperjs/bin/mocha-casperjs test/spec/one_failure.js --reporter=./mocha-phantom-reporter/spec --output=results.txt\u000a","readmeFilename":"README.md","gitHead":"c7631046c3bbc0bf47f9fb2f40bdb9c69a0f53d2","_id":"mocha-phantom-reporter@0.0.4","_shasum":"86e52f5875a20b4c11ecc4652c777b10d048ea89","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"thekevinscott","email":"kevin@scottlabsllc.com"},"maintainers":[{"name":"thekevinscott","email":"kevin@scottlabsllc.com"}],"dist":{"shasum":"86e52f5875a20b4c11ecc4652c777b10d048ea89","tarball":"http://registry.npmjs.org/mocha-phantom-reporter/-/mocha-phantom-reporter-0.0.4.tgz"}}: mocha-phantom-reporter
-41 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
-41 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
-41 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
-41 error     at Request.emit (events.js:98:17)
-41 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1142:14)
-41 error     at Request.emit (events.js:117:20)
-41 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1096:12)
-41 error     at IncomingMessage.emit (events.js:117:20)
-41 error     at _stream_readable.js:943:16
-41 error     at process._tickCallback (node.js:419:13)
-42 error If you need help, you may report this *entire* log,
-42 error including the npm and node versions, at:
-42 error     <http://github.com/npm/npm/issues>
-43 error System Darwin 14.0.0
-44 error command "node" "/usr/local/bin/npm" "publish"
-45 error cwd /Users/kscott/Development/mocha-phantom-reporter
-46 error node -v v0.10.32
-47 error npm -v 1.4.28
-48 verbose exit [ 1, true ]
+4 error Error: ENOENT, open '/Users/kscott/Development/mocha-phantom-reporter/node_modules/test/spec/one_failure.js/package.json'
+5 error If you need help, you may report this *entire* log,
+5 error including the npm and node versions, at:
+5 error     <http://github.com/npm/npm/issues>
+6 error System Darwin 14.0.0
+7 error command "node" "/usr/local/bin/npm" "test" "test/spec/one_failure.js"
+8 error cwd /Users/kscott/Development/mocha-phantom-reporter
+9 error node -v v0.10.32
+10 error npm -v 1.4.28
+11 error path /Users/kscott/Development/mocha-phantom-reporter/node_modules/test/spec/one_failure.js/package.json
+12 error code ENOENT
+13 error errno 34
+14 verbose exit [ 34, true ]

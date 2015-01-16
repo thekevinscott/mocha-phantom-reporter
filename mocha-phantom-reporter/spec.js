@@ -3,11 +3,25 @@
  */
 
 var fs = require('fs');
+var opts = cli.parse(phantom.args);
+var integrationDir = opts.options['spec-dir'] || '';
+var files = opts.args.slice(1).map(function(file) {
+    if ( file.indexOf('scaffolding') === -1 ) {
+        //console.log(integrationDir);
+        file = fs.absolute(file).substring(fs.absolute(integrationDir).length);
+        //console.log(file);
+        return file;
+    }
+}).filter(function(file) { if (file) { return file; } });
+var current = 0;
 var Base = Mocha.reporters.Base
   , cursor = Base.cursor
   , color = Base.color
   , ms = require('../node_modules/mocha/lib/ms');
 
+String.prototype.capitalize = function() {
+    return this.substring(0,1).toUpperCase()+this.substring(1);
+};
 /**
  * Expose `Spec`.
  */
@@ -41,61 +55,31 @@ function Spec(runner) {
         console.log();
     });
 
+    function writeParent() {
+        var file = files[current].split('/');
+        if ( file.length > 1 ) {
+            var parentTitle = files[current].split('/').shift().capitalize();
+            console.log(color('suite', '%s%s'), indent(), parentTitle);
+            current++;
+        }
+    };
+
     runner.on('suite', function(suite){
+        if ( indents === 1 ) {
+            ++indents;
+            writeParent(current);
+            //console.log('runner', Object.keys(runner));
+        }
         var title = suite.title;
         ++indents;
-
-        function last(arr) {
-            return arr[arr.length-1];
-        };
-
-        function getParent(indents, arr) {
-            if ( ! arr ) { arr = suites; }
-
-            if ( indents <= 1 ) {
-                var a = arr;
-                if ( a.length && last(a).children && last(a).children.length) {
-                    a = last(last(a).children);
-                    if ( a.title ) {
-                        return a.title;
-                    }
-                }
-                return undefined;
-            } else {
-                --indents;
-                return getParent(indents, last(arr).children);
-            }
-        };
-
-        function pushSuite(title, indents, suites) {
-            if ( indents <= 0 ) {
-                var parentSuitesChildren = suites;
-                var suite = {
-                    title: title,
-                    children: []
-                };
-                parentSuitesChildren.push(suite);
-            } else {
-                --indents;
-                pushSuite(title, indents, last(suites).children);
-            }
-        };
-
-        //var theParent = getParent(indents);
-        //console.log('parent', theParent, 'title', title);
-
-        if ( getParent(indents) != title) {
-        //if ( 1 || last(suites) !== title ) {
-            pushSuite(title, indents, suites);
-            console.log(color('suite', '%s%s'), indent(), suite.title);
-        } else {
-            //console.log('dont write');
-            //console.log('title has been seen already', title);
-        }
+        console.log(color('suite', '%s%s'), indent(), suite.title);
     });
 
     runner.on('suite end', function(suite){
         --indents;
+        if ( indents === 2 ) {
+            --indents;
+        }
         if (1 == indents) console.log();
     });
 
