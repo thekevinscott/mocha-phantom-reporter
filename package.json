@@ -1,6 +1,6 @@
 {
   "name": "mocha-phantom-reporter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A standalone Mocha Reporter modeled after spec",
   "main": "mocha-phantom-reporter/spec.js",
   "scripts": {

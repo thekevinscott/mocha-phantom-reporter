@@ -25,11 +25,13 @@ var cmd = function(command) {
 describe('Test Mocha Reporter output', function() {
     it('should match for one success', function(done) {
         var files = [
+            'test/spec/account/login.js',
+            'test/spec/components/search.js',
+            'test/spec/debug.js',
+            'test/spec/groups/create.js',
             'test/spec/users/create.js',
             'test/spec/users/edit.js',
             'test/spec/users/list.js',
-            'test/spec/debug.js',
-            'test/spec/groups/create.js',
 
         ];
         runTest(files.join(' '), 'test/fixtures/bigTest.js', done);

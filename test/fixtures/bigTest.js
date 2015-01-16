@@ -1,5 +1,20 @@
 
 
+  Account
+    login
+      ✓ should say yay 
+
+  Components
+    search
+      ✓ should say yay 
+
+  debug
+    ✓ should say yay 
+
+  Groups
+    create
+      ✓ should say yay 
+
   Users
     create
       ✓ should say yay 
@@ -13,13 +28,6 @@
     list
       ✓ should say yay 
 
-  debug
-    ✓ should say yay 
 
-  Groups
-    create
-      ✓ should say yay 
-
-
-  6 passing 
+  8 passing 
 
