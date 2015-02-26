@@ -46,7 +46,8 @@ function Spec(runner) {
         , n = 0
         , tests = []
         , failures = []
-        , passes = [];
+        , passes = []
+        , skipped = [];
 
     function indent() {
         return Array(indents).join('  ')
@@ -106,6 +107,7 @@ function Spec(runner) {
     });
 
     runner.on('pending', function(test){
+        skipped.push(test);
         var fmt = indent() + color('pending', '  - %s');
         console.log(fmt, test.title);
     });
@@ -181,8 +183,9 @@ function Spec(runner) {
             , tests: tests.map(clean)
             , failures: failures.map(clean)
             , passes: passes.map(clean)
+            , skipped: skipped.map(clean)
         };
-        var output = 'tmp.txt';
+        var output = 'tmp.json';
         phantom.args.map(function(arg) {
             if ( arg.indexOf('output') === 2 ) {
                 output = arg.split('=').pop();
